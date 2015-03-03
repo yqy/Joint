@@ -10,6 +10,7 @@ def getFeature(ec_dict,node_list,trans_set,pronouns_last):
     fl = []           
     nearset_pronoun = "None"
     pronoun_set = set()
+    pronoun_list = ["你","你们","我","我们","它","它们","他","他们","她","她们"]
     for node_item in node_list:
         if not node_item.word is None:
             ifl = []
@@ -133,6 +134,8 @@ def getFeature(ec_dict,node_list,trans_set,pronouns_last):
             root_path = "_".join(rp)
             ifl.append("root_path:%s"%root_path)
             ifl.append("nearset_pronoun:%s"%nearset_pronoun) 
+            if node_item.word in pronoun_list:
+                nearset_pronoun = node_item.word
             ifl.append("pronouns:%s"%("_".join(pronouns_last)))
             fl.append(ifl)
     return fl,pronoun_set
